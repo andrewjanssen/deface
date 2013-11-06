@@ -9,6 +9,8 @@ module Deface
 
     # logs if original source has changed
     def validate_original(match)
+      match = match.join("") unless match.is_a?(Nokogiri::XML::Element)
+
       hashed_original = Digest::SHA1.hexdigest(match.to_s.gsub(/\s/, ''))
 
       if @args[:original].present?
